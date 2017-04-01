@@ -15,7 +15,7 @@ def login():
 @app.route('/test')
 def test():
     theSalad = Food(name='Caesar Salad', upc='Ross', expiry=datetime.date(2017, 5, 1)).save()
-    return Food.objects
+    return "It probably worked"
 
 class Food(db.Document):
     name = db.StringField(required=True)
