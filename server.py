@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, render_template, request, url_for
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return('Hello, World!')
+@app.route('/<name>')
+def hello(name):
+    return("Hello, %s!" % name)
