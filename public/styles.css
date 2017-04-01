@@ -1,0 +1,16 @@
+header {
+  height: 60px;
+  background-color: #F44336;
+}
+
+form {
+  width: 500px;
+  margin: 50px;
+}
+
+.search {
+  border: 0px solid;
+  background-color: #FFCDD2;
+  padding: 8px;
+  width: 350px;
+}
