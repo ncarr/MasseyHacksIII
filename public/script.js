@@ -1,4 +1,4 @@
-var modal = document.getElementById('myModal');
+/*var modal = document.getElementById('myModal');
 
 var btn = document.getElementById("fab");
 
@@ -19,3 +19,4 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+*/
