@@ -15,9 +15,13 @@ def getRecipes(queries):
     r = requests.get('https://api.edamam.com/api/nutrition-data?q=' + qstring + '?app_id=' + app.config.get('EDAMAM_RECIPE_ID') + '&app_key=' + app.config.get('EDAMAM_RECIPE_KEY'))
     return r.json()
 
+def getFroots():
+    with open('data.json', 'r') as f:
+        return json.load(f)
+
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', basket=getFroots())
 
 @app.route('/fruits/add', methods=['POST'])
 def addFroot():
