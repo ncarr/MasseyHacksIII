@@ -25,3 +25,8 @@ right: 20px;
 body {
   margin: 0;
 }
+
+h1 {
+  font-family: "Palanquin";
+  font-size: "20px";
+}
