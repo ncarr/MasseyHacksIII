@@ -11,7 +11,7 @@ with open('fruits.csv', newline='') as csvfile:
         fruitlist[row[0]] = row[1]
 
 def getRecipe(query):
-    r = requests.get('https://api.edamam.com/api/nutrition-data?q=' + query + '?app_id=' + app.config.get('EDAMAM_RECIPE_ID') + '&app_key=' + app.config.get('EDAMAM_RECIPE_KEY'))
+    r = requests.get('https://api.edamam.com/search?q=' + query + '&app_id=' + app.config.get('EDAMAM_RECIPE_ID') + '&app_key=' + app.config.get('EDAMAM_RECIPE_KEY'))
     return r.json()
 
 def getFroots():
@@ -20,8 +20,9 @@ def getFroots():
 
 def getRecipes():
     returnstatement = {}
-    for fruit, _ in getFroots():
-        returnstatement[fruit] = getRecipe(fruit)['hits']['recipe']
+    for fruit, _ in getFroots().items():
+        returnstatement[fruit] = getRecipe(fruit).get('hits')[0].get('recipe')
+    return returnstatement
 
 @app.route('/')
 def home():

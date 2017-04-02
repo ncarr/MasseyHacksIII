@@ -70,11 +70,11 @@
           <h1>Recipes</h1>
           <div class="card-row" style="padding: 5px;">
 
-            {% for recipe in recipes %}
-            <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background: url('{{ recipe.url }}') center / cover;">
+            {% for froot, recipe in recipes.items() %}
+            <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background: url('{{ recipe.image }}') center / cover;">
               <div class="mdl-card__title mdl-card--expand"></div>
               <div class="mdl-card__actions">
-                <span class="demo-card-image__filename">{{ recipe.name }}</span>
+                <span class="demo-card-image__filename">{{ recipe.label }}</span>
               </div>
             </div>
             {% else %}
