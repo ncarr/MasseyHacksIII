@@ -1,0 +1,9 @@
+<!doctype html>
+<title>Code goes here</title>
+{% if name %}
+  <h1>{{ name }}</h1>
+  <img src={{imageUrl}} alt={{name}}>
+  <p>Calories: {{calories}}</p>
+{% else %}
+  <h1>THIS IS AN ERROR PAGE</h1>
+{% endif %}
