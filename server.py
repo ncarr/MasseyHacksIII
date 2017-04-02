@@ -21,7 +21,7 @@ def getFroots():
 
 @app.route('/')
 def home():
-    return render_template('index.html', basket=getFroots())
+    return render_template('index.html', basket=getFroots(), fruits=fruitlist)
 
 @app.route('/fruits/eat', methods=['POST'])
 def deletFroot():
