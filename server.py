@@ -10,6 +10,11 @@ with open('fruits.csv', newline='') as csvfile:
     for row in fruitreader:
         fruitlist[row[0]] = row[1]
 
+def getRecipes(queries):
+    qstring = ",".join(queries)
+    r = requests.get('https://api.edamam.com/api/nutrition-data?q=' + qstring + '?app_id=' + app.config.get('EDAMAM_RECIPE_ID') + '&app_key=' + app.config.get('EDAMAM_RECIPE_KEY'))
+    return r.json()
+
 @app.route('/')
 def home():
     return render_template('index.html')
