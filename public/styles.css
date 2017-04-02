@@ -1,13 +1,9 @@
 header {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   height: 60px;
   background-color: #F44336;
-}
-
-form {
-  width: 500px;
-  margin: 50px;
 }
 
 .search {
@@ -15,4 +11,8 @@ form {
   background-color: #FFCDD2;
   padding: 8px;
   width: 350px;
+}
+
+body {
+  margin: 0;
 }
