@@ -11,6 +11,10 @@ with open('fruits.csv', newline='') as csvfile:
     for row in fruitreader:
         fruitlist[row[0]] = row[1]
 
+@app.route('/')
+def home():
+    return app.send_static_file('index.html')
+
 @app.route('/fruits')
 def addFruit():
     return render_template('fruits.html', fruits=fruitlist)
@@ -24,10 +28,12 @@ def fruitInfo(name):
         imageUrl = 'https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg'
     return render_template('fruitInfo.html', name=name, calories=appleInfo['calories'], imageUrl=imageUrl)
 
+"""
 @app.route('/api/fruits', methods=['POST'])
 def uploadFruit():
     if request.method == 'POST':
         Fruit(name=request.form['name'], upc=request.form['upc'], expiry=datetime.datetime.strptime(request.form['expiry'], '%Y-%m-%d')).save()
+"""
 
 class Fruit(db.Document):
     name = db.StringField(required=True)
