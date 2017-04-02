@@ -1,21 +1,31 @@
 from flask import Flask, render_template, request, url_for
 from flask_mongoengine import MongoEngine
-import datetime, requests
+import datetime, requests, csv
 app = Flask(__name__)
 app.config.from_pyfile('cfg.py')
 db = MongoEngine(app)
 
+fruitlist = {'name':[], 'url':[]}
+with open('fruits.csv', newline='') as csvfile:
+    fruitreader = csv.reader(csvfile)
+    for row in fruitreader:
+        fruitlist[row[0]] = row[1]
+
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        return render_template('hello.html', name=request.args.get("name"))
+        return render_template('index.html', name=request.args.get("name"))
     else:
-        return render_template('hello.html', name=request.args.get("name"))
+        return render_template('index.html', name=request.args.get("name"))
 
-@app.route('/fruitinfo')
-def fruitInfo():
-    appleInfo = Nutrition.getFruit('1 large apple')
-    return render_template('fruitInfo.html', name=appleInfo['ingredients'][0]['text'], calories=appleInfo['calories'], imageUrl='https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg')
+@app.route('/fruitinfo/<name>')
+def fruitInfo(name):
+    appleInfo = Nutrition.getFruit(name)
+    try:
+        imageUrl = fruitlist[name]
+    except IndexError:
+        imageUrl = 'https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg'
+    return render_template('fruitInfo.html', name=name, calories=appleInfo['calories'], imageUrl=imageUrl)
 
 @app.route('/api/fruits', methods=['POST'])
 def uploadFruit():
@@ -29,5 +39,5 @@ class Fruit(db.Document):
 
 class Nutrition(object):
     def getFruit(ingredient):
-        r = requests.get('https://api.edamam.com/api/nutrition-data?app_id=' + app.config.get('EDAMAM_APP_ID') + '&app_key=' + app.config.get('EDAMAM_APP_KEY') + '&ingr=' + ingredient)
+        r = requests.get('https://api.edamam.com/api/nutrition-data?app_id=' + app.config.get('EDAMAM_APP_ID') + '&app_key=' + app.config.get('EDAMAM_APP_KEY') + '&ingr=1%20' + ingredient)
         return r.json()
