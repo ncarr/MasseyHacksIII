@@ -68,7 +68,7 @@
           <div class="card-row-grid" style="padding: 5px;">
 
             {% for name, url in fruits.items() %}
-            <div v-if="'{{name}}'.includes(search)" name="{{name}}" class="demo-card-image mdl-card mdl-shadow--2dp" style="cursor: pointer; background: url('{{ url }}') center / cover;">
+            <div v-if="'{{name.lower()}}'.includes(search.toLowerCase())" name="{{name}}" class="demo-card-image mdl-card mdl-shadow--2dp" style="cursor: pointer; background: url('{{ url }}') center / cover;">
               <div class="mdl-card__title mdl-card--expand"></div>
               <div class="mdl-card__actions" style="text-align: left;">
                 <form method="POST" action="/fruits/add">
