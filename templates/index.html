@@ -101,15 +101,29 @@
               <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                 {{ fruit.qty }}
               </button>
-              <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                <i class="material-icons">restaurant_menu</i>
-              </button>
+              <form method="POST" action="/fruits/eat">
+                <input type="hidden" value="{{fruit.name}}" name="name">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                  <i class="material-icons">restaurant_menu</i>
+                </button>
+              </form>
             </div>
             {% else %}
             <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background-color: #ff91ff;">
               <div class="mdl-card__title mdl-card--expand"></div>
               <div class="mdl-card__actions">
                 <span class="demo-card-image__filename">Please add fruit</span>
+              </div>
+              <div class="mdl-card__menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                  5
+                </button>
+                <form method="POST" action="/fruits/eat" style="display:inline">
+                  <input type="hidden" value="fake" name="name">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">restaurant_menu</i>
+                  </button>
+                </form>
               </div>
             </div>
             {% endfor %}
