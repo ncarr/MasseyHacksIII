@@ -21,6 +21,13 @@
   overflow-x: scroll;
 }
 
+.card-row-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
 #fab{
   background-color: #F44336;
   position: fixed;
