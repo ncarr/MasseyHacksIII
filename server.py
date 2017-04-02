@@ -26,22 +26,28 @@ def getRecipes():
 
 @app.route('/')
 def home():
-    return render_template('index.html', recipes=getRecipes(), basket=getFroots(), fruits=fruitlist)
+    try:
+        return render_template('index.html', recipes=getRecipes(), basket=getFroots(), fruits=fruitlist)
+    except:
+        return render_template('index.html')
 
 @app.route('/fruits/eat', methods=['POST'])
 def deletFroot():
     data = {}
     with open('data.json', 'r') as f:
         data = json.load(f)
+        name = request.form['name']
         try:
-            data[request.form['name']]
+            data[name]
         except:
-            data[request.form['name']] = 0
+            data[name] = 0
             with open('data.json', 'w') as f:
                 json.dump(data, f)
             return redirect(url_for('home'), code=302)
         else:
-            data[request.form['name']] -= 1
+            data[name] -= 1
+            if data[name] <= 0:
+                del data[name]
             with open('data.json', 'w') as f:
                 json.dump(data, f)
             return redirect(url_for('home'), code=302)
