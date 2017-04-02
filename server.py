@@ -12,7 +12,7 @@ with open('fruits.csv', newline='') as csvfile:
 
 @app.route('/')
 def home():
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 @app.route('/fruits/add', methods=['POST'])
 def addFroot():
