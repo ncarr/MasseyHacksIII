@@ -7,10 +7,19 @@ header {
 }
 
 .search {
+  font-family: "Open Sans",sans-serif;
+  font-size: 18px;
   border: 0px solid;
-  background-color: #FFCDD2;
+  background-color: #FAFAFA;
   padding: 8px;
   width: 350px;
+}
+
+#fab{
+  background-color: #F44336;
+position: fixed;
+bottom: 20px;
+right: 20px;
 }
 
 body {
