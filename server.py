@@ -10,18 +10,22 @@ with open('fruits.csv', newline='') as csvfile:
     for row in fruitreader:
         fruitlist[row[0]] = row[1]
 
-def getRecipes(queries):
-    qstring = ",".join(queries)
-    r = requests.get('https://api.edamam.com/api/nutrition-data?q=' + qstring + '?app_id=' + app.config.get('EDAMAM_RECIPE_ID') + '&app_key=' + app.config.get('EDAMAM_RECIPE_KEY'))
+def getRecipe(query):
+    r = requests.get('https://api.edamam.com/api/nutrition-data?q=' + query + '?app_id=' + app.config.get('EDAMAM_RECIPE_ID') + '&app_key=' + app.config.get('EDAMAM_RECIPE_KEY'))
     return r.json()
 
 def getFroots():
     with open('data.json', 'r') as f:
         return json.load(f)
 
+def getRecipes():
+    returnstatement = {}
+    for fruit, _ in getFroots():
+        returnstatement[fruit] = getRecipe(fruit)['hits']['recipe']
+
 @app.route('/')
 def home():
-    return render_template('index.html', basket=getFroots(), fruits=fruitlist)
+    return render_template('index.html', recipes=getRecipes(), basket=getFroots(), fruits=fruitlist)
 
 @app.route('/fruits/eat', methods=['POST'])
 def deletFroot():
