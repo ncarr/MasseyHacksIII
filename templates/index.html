@@ -35,33 +35,12 @@
       <header id=header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title" style="margin-right:20px;">FruitBasket</span>
-          <!-- Title -->
-          <form action="#">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-              <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
-                <i class="material-icons">search</i>
-              </label>
-              <div class="mdl-textfield__expandable-holder">
-                <input class="mdl-textfield__input" type="text" id="sample6">
-                <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
-              </div>
-            </div>
-          </form>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
 
         </div>
       </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Menu</span>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-        </nav>
-      </div>
       <main class="mdl-layout__content" style="padding: 20px;">
         <!--
             PAGE CONTENT STARTS HERE
@@ -71,12 +50,14 @@
           <div class="card-row" style="padding: 5px;">
 
             {% for froot, recipe in recipes.items() %}
-            <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background: url('{{ recipe.image }}') center / cover;">
-              <div class="mdl-card__title mdl-card--expand"></div>
-              <div class="mdl-card__actions">
-                <span class="demo-card-image__filename">{{ recipe.label }}</span>
+            <a href="{{recipe.url}}" style="text-decoration:none;">
+              <div class="demo-card-image mdl-card mdl-shadow--2dp" style="cursor: pointer;background: url('{{ recipe.image }}') center / cover;">
+                <div class="mdl-card__title mdl-card--expand"></div>
+                <div class="mdl-card__actions">
+                  <span class="demo-card-image__filename">{{ recipe.label }}</span>
+                </div>
               </div>
-            </div>
+            </a>
             {% else %}
             <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background-color: #ff91ff;">
               <div class="mdl-card__title mdl-card--expand"></div>
