@@ -24,7 +24,7 @@ def home():
     return render_template('index.html', basket=getFroots())
 
 @app.route('/fruits/eat', methods=['POST'])
-def addFroot():
+def deletFroot():
     data = {}
     with open('data.json', 'r') as f:
         data = json.load(f)
