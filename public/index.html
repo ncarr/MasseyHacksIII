@@ -7,7 +7,6 @@
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Palanquin:100" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src ="dropdown.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Fruitbasket</title>
     <!-- Image card -->
@@ -101,8 +100,17 @@
       </form>
     </header>
     <!-- Colored FAB button -->
-    <button id=fab class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <button id="fab" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
       <i class="material-icons">add</i>
     </button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Test</p>
+      </div>
+    </div>
+    <script src ="script.js"></script>
   </body>
 </html>
