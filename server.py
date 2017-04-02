@@ -9,12 +9,23 @@ db = MongoEngine(app)
 def addProduct():
     return render_template("form.html")
 
-@app.route('/test')
-def test():
-    theSalad = Food(name='Caesar Salad', upc='Ross', expiry=datetime.date(2017, 5, 1)).save()
-    return "It probably worked"
+@app.route('/api/uploadfood', methods=['POST'])
+def uploadfood():
+    if request.method == 'POST':
+        Food(name=request.form['name'], upc=request.form['upc'], expiry=datetime.datetime.strptime(request.form['expiry'], '%Y-%m-%d')).save()
 
 class Food(db.Document):
     name = db.StringField(required=True)
     upc = db.StringField()
     expiry = db.DateTimeField()
+    #fridge = db.ReferenceField(Fridge, reverse_delete_rule=CASCADE)
+
+"""
+class Fridge(db.Document):
+    name = db.StringField(required=True)
+    owner = db.ReferenceField(User, reverse_delete_rule=CASCADE)
+
+class User(db.Document):
+    name = db.StringField(required=True)
+    fridges = db.List
+"""
