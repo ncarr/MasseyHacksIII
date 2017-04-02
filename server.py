@@ -27,15 +27,9 @@ def fruitInfo(name):
         imageUrl = 'https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg'
     return render_template('fruitInfo.html', name=name, calories=appleInfo['calories'], imageUrl=imageUrl)
 
-@app.route('/api/fruits', methods=['POST'])
-def uploadFruit():
-    if request.method == 'POST':
-        Fruit(name=request.form['name'], upc=request.form['upc'], expiry=datetime.datetime.strptime(request.form['expiry'], '%Y-%m-%d')).save()
-
 class Fruit(db.Document):
     name = db.StringField(required=True)
-    upc = db.StringField()
-    expiry = db.DateTimeField()
+    qty = db.IntField(required=True)
 
 class Nutrition(object):
     def getFruit(ingredient):
