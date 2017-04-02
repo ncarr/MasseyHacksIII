@@ -23,6 +23,24 @@ def getFroots():
 def home():
     return render_template('index.html', basket=getFroots())
 
+@app.route('/fruits/eat', methods=['POST'])
+def addFroot():
+    data = {}
+    with open('data.json', 'r') as f:
+        data = json.load(f)
+        try:
+            data[request.form['name']]
+        except:
+            data[request.form['name']] = 0
+            with open('data.json', 'w') as f:
+                json.dump(data, f)
+            return redirect(url_for('home'), code=302)
+        else:
+            data[request.form['name']] -= 1
+            with open('data.json', 'w') as f:
+                json.dump(data, f)
+            return redirect(url_for('home'), code=302)
+
 @app.route('/fruits/add', methods=['POST'])
 def addFroot():
     data = {}
