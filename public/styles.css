@@ -15,6 +15,12 @@
   width: 350px;
 }
 
+.card-row {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
+
 #fab{
   background-color: #F44336;
 position: fixed;
