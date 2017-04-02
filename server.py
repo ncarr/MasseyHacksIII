@@ -5,12 +5,9 @@ app = Flask(__name__)
 app.config.from_pyfile('cfg.py')
 db = MongoEngine(app)
 
-@app.route('/', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        return render_template('hello.html', name=request.args.get("name"))
-    else:
-        return render_template('hello.html', name=request.args.get("name"))
+@app.route('/addProduct')
+def addProduct():
+    return render_template("form.html")
 
 @app.route('/test')
 def test():
