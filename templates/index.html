@@ -91,10 +91,21 @@
           <div class="card-row" style="padding: 5px;">
 
             {% for name, qty in basket.items() %}
-            <div v-if="'{{name}}'.includes(search)" name="{{name}}" class="demo-card-image mdl-card mdl-shadow--2dp" style="cursor: pointer; background: url('{{ fruits[name] }}') center / cover;">
+            <div class="demo-card-image mdl-card mdl-shadow--2dp" style="cursor: pointer; background: url('{{ fruits[name] }}') center / cover;">
               <div class="mdl-card__title mdl-card--expand"></div>
               <div class="mdl-card__actions" style="text-align: left;">
                 <span class="demo-card-image__filename" style="color: black;">{{ name }}</span>
+              </div>
+              <div class="mdl-card__menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                  {{ qty }}
+                </button>
+                <form method="POST" action="/fruits/eat" style="display: inline;">
+                  <input type="hidden" value="{{ name }}" name="name">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">restaurant_menu</i>
+                  </button>
+                </form>
               </div>
             </div>
             {% else %}
