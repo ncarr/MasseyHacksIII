@@ -92,10 +92,18 @@
 
             {% for fruit in basket %}
             <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background: url('{{ fruit.url }}') center / cover;">
-              <div class="mdl-card__title mdl-card--expand"></div>
+              <div class="mdl-card__title mdl-card--expand">
               <div class="mdl-card__actions">
                 <span class="demo-card-image__filename">{{ fruit.name }}</span>
               </div>
+            </div>
+            <div class="mdl-card__menu">
+              <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                {{ fruit.qty }}
+              </button>
+              <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i class="material-icons">restaurant_menu</i>
+              </button>
             </div>
             {% else %}
             <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background-color: #ff91ff;">
