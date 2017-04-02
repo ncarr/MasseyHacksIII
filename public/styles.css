@@ -41,6 +41,7 @@ h1 {
 h2 {
   font-family: "Palanquin";
   font-size: 35px;
+  margin: 0px;
 }
 
 /* The Modal (background) */
@@ -59,7 +60,7 @@ h2 {
 .modal-header {
   background-color: #F44336;
   color: white;
-  padding: 16px 16px;
+  padding: 16px;
 }
 
 .modal-body {padding: 2px 16px;}
