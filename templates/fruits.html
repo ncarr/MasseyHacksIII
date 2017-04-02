@@ -59,14 +59,14 @@
         <div class="card-row-holder">
           <form action="#" style="display: flex;justify-content:center;">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="sample3">
+              <input v-model="search" class="mdl-textfield__input" type="text" id="sample3">
               <label class="mdl-textfield__label" for="sample3">Search</label>
             </div>
           </form>
           <div class="card-row-grid" style="padding: 5px;">
 
             {% for name, url in fruits.items() %}
-            <div name="{{name}}" class="demo-card-image mdl-card mdl-shadow--2dp" style="cursor: pointer; background: url('{{ url }}') center / cover;">
+            <div v-if="'{{name}}'.includes(search)" name="{{name}}" class="demo-card-image mdl-card mdl-shadow--2dp" style="cursor: pointer; background: url('{{ url }}') center / cover;">
               <div class="mdl-card__title mdl-card--expand"></div>
               <div class="mdl-card__actions" style="text-align: left;">
                 <form method="POST" action="/fruits/add">
@@ -88,5 +88,14 @@
         </div>
       </main>
     </div>
+    <script src="vue.js"></script>
+    <script>
+    var app = new Vue({
+      el: '.card-row-holder',
+      data: {
+        search: ''
+      }
+    });
+    </script>
   </body>
 </html>
