@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, url_for
-from flask_mongoengine import MongoEngine
+from flask import Flask, render_template, request, url_for, redirect
+import json
 import datetime, requests, csv
 app = Flask(__name__, static_folder='public', static_url_path='')
 app.config.from_pyfile('cfg.py')
-db = MongoEngine(app)
 
 fruitlist = {}
 with open('fruits.csv', newline='') as csvfile:
@@ -15,8 +14,26 @@ with open('fruits.csv', newline='') as csvfile:
 def home():
     return app.send_static_file('index.html')
 
+@app.route('/fruits/add', methods=['POST'])
+def addFroot():
+    data = {}
+    with open('data.json', 'r') as f:
+        data = json.load(f)
+        try:
+            data[request.form['name']]
+        except:
+            data[request.form['name']] = 1
+            with open('data.json', 'w') as f:
+                json.dump(data, f)
+            return redirect(url_for('froots'), code=302)
+        else:
+            data[request.form['name']] += 1
+            with open('data.json', 'w') as f:
+                json.dump(data, f)
+            return redirect(url_for('froots'), code=302)
+
 @app.route('/fruits')
-def addFruit():
+def froots():
     return render_template('fruits.html', fruits=fruitlist)
 
 @app.route('/fruitinfo/<name>')
@@ -27,18 +44,6 @@ def fruitInfo(name):
     except IndexError:
         imageUrl = 'https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg'
     return render_template('fruitInfo.html', name=name, calories=appleInfo['calories'], imageUrl=imageUrl)
-
-"""
-@app.route('/api/fruits', methods=['POST'])
-def uploadFruit():
-    if request.method == 'POST':
-        Fruit(name=request.form['name'], upc=request.form['upc'], expiry=datetime.datetime.strptime(request.form['expiry'], '%Y-%m-%d')).save()
-"""
-
-class Fruit(db.Document):
-    name = db.StringField(required=True)
-    upc = db.StringField()
-    expiry = db.DateTimeField()
 
 class Nutrition(object):
     def getFruit(ingredient):

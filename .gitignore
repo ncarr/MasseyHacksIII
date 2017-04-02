@@ -140,3 +140,6 @@ $RECYCLE.BIN/
 
 # Config
 cfg.py
+
+#Local app data
+data.json
